@@ -1,0 +1,35 @@
+# To run a container with container_id
+
+docker exec -it container_id
+
+# Build the project
+
+npx create-react-app frontend
+
+npm run start # Starts up a development server
+npm run test # Run tests
+npm run build # Builds a production version
+
+# Run Custom Dockerfile
+docker build -f Dockerfile.dev . 
+
+rm -rf node_modules
+
+# Run the container
+docker run -it -p 3000:3000 044cb9ae932a
+
+# Working with volume
+
+docker build -f Dockerfile.dev . 
+docker run -it -p 3000:3000 -v /app/node_modules -v $(pwd):/app fd452bfca2b7
+
+# Run tests
+docker build -f Dockerfile.dev .
+docker run 044cb9ae932a npm run test
+docker run -it 044cb9ae932a npm run test
+
+# Run tests using docker-compose
+
+# Build production image
+docker build .
+docker run -p 8080:80 container_id
